@@ -1,0 +1,18 @@
+body{
+    background-color:rgb(118, 206, 177);
+}
+.navbar {
+    background-color: rgb(127, 192, 170) !important;
+}
+
+.bodyArea {
+    background-color: rgb(118, 206, 177);
+}
+
+.container {
+    background-color: blanchedalmond;
+}
+
+#coinTable *{
+    background-color: rgb(209, 198, 181) ;
+}

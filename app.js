@@ -34,7 +34,7 @@ const createTable = (data) => {
         tableHTML += `
         <tr>
             <td>${item.rank}</td>
-            <td><span><img src="${item.iconUrl}" alt="" width="30px" /></span>${item.name}  <sup class="bg-warning border-rounded rounded-1 text-white">${item.symbol}</sup></td>
+            <td><span><img src="${item.iconUrl}" class="spanBorder" alt="" width="30px" /></span>${item.name}  <sup class="bg-warning border-rounded rounded-1 text-white">${item.symbol}</sup></td>
             <td>&dollar; ${Number(item.price).toFixed(4)}</td>
             <td> ${formatMarketCap(item.marketCap)}</td>
             <td class="stonks"> ${item.change}</td>
@@ -95,13 +95,18 @@ const filterData = (searchText) => {
         return item.name.toLowerCase().includes(searchText) || item.symbol.toLowerCase().includes(searchText);
     });
     createTable(filteredData);
+    
 }
 
 const searchInput = document.querySelector("#searchInput");
-searchInput.addEventListener("input", (e) => {
+searchInput.addEventListener("input",(e) => {
     const searchText = e.target.value;
     filterData(searchText);
+    if(searchText.length === 0){
+        getData()
+    }
 });
+
 
 
 getData();
