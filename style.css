@@ -1,18 +1,23 @@
 body{
-    background-color:rgb(118, 206, 177);
+    background-color:rgba(50, 95, 79, 0.582);
 }
 .navbar {
-    background-color: rgb(127, 192, 170) !important;
+    background-color: rgb(109, 168, 148) !important;
 }
 
 .bodyArea {
-    background-color: rgb(118, 206, 177);
+    background-color: rgba(50, 95, 79, 0.582);
 }
 
 .container {
-    background-color: blanchedalmond;
+    background-color: black;
 }
 
 #coinTable *{
     background-color: rgb(209, 198, 181) ;
+}
+
+
+.logo{
+    border-radius: 50%;
 }
