@@ -4,6 +4,7 @@ const getData = async () => {
         if (response.ok) {
             const data = await response.json();
             createTable(data.data.coins);
+            return data.data.coins;
         } else {
             console.log(`There was an error: ${response.status}`);
         }
@@ -13,7 +14,7 @@ const getData = async () => {
 }
 
 
-getData();
+let coinData = [];
 
 const createTable = (data) => {
     const table = document.getElementById("coinTable")
@@ -45,6 +46,7 @@ const createTable = (data) => {
     </tbody>
     `
     table.innerHTML = tableHTML
+    coinData = data
 
     const changeCells = table.querySelectorAll(".stonks");
     data.forEach((item, index) => {
@@ -77,7 +79,7 @@ const changePrice = (data) => {
         stonks.className = "fa-solid fa-arrow-trend-up"
         stonks.style.color = "green"
 
-    }else if (data = 0) {
+    } else if (data === 0) {
         stonks.style.color = "gray"
     } else {
         stonks.className = "fa-solid fa-arrow-trend-down"
@@ -87,9 +89,19 @@ const changePrice = (data) => {
     return stonks
 }
 
-const searchInput = document.querySelector("#searchInput")
+const filterData = (searchText) => {
+    searchText = searchText.toLowerCase();
+    const filteredData = coinData.filter((item) => {
+        return item.name.toLowerCase().includes(searchText) || item.symbol.toLowerCase().includes(searchText);
+    });
+    createTable(filteredData);
+}
+
+const searchInput = document.querySelector("#searchInput");
 searchInput.addEventListener("input", (e) => {
-	console.log(e.target.value);
-	
-	createTable.filter((e) => e.target.name.toLowerCase().includes(e.target.value)).forEach((user) => createEl(user));
+    const searchText = e.target.value;
+    filterData(searchText);
 });
+
+
+getData();
