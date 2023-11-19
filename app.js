@@ -1,15 +1,17 @@
 const getData = async () => {
     try {
         const response = await fetch('https://api.coinranking.com/v2/coins');
-        const data = await response.json();
-        console.log(data.data.coins);
-        // getCoin();
-        createTable(data.data.coins)
+        if (response.ok) {
+            const data = await response.json();
+            createTable(data.data.coins);
+        } else {
+            console.log(`There was an error: ${response.status}`);
+        }
     } catch (error) {
-        console.log('Veri çekme işlemi başarısız oldu: ', error);
-
+        console.log('An error occurred while fetching data:', error);
     }
 }
+
 
 getData();
 
@@ -31,10 +33,10 @@ const createTable = (data) => {
         tableHTML += `
         <tr>
             <td>${item.rank}</td>
-            <td><span><img src="${item.iconUrl}" alt="" width="30px" /></span>${item.name}  <sup class="bg-warning bd-rounded rounded-1 text-white">${item.symbol}</sup></td>
+            <td><span><img src="${item.iconUrl}" alt="" width="30px" /></span>${item.name}  <sup class="bg-warning border-rounded rounded-1 text-white">${item.symbol}</sup></td>
             <td>&dollar; ${Number(item.price).toFixed(4)}</td>
             <td> ${formatMarketCap(item.marketCap)}</td>
-            <td><i class="fa-solid fa-arrow-up-right-dots" id="stonks"></i> ${item.change}</td>
+            <td class="stonks"> ${item.change}</td>
         </tr>
 
     `
@@ -43,26 +45,51 @@ const createTable = (data) => {
     </tbody>
     `
     table.innerHTML = tableHTML
+
+    const changeCells = table.querySelectorAll(".stonks");
+    data.forEach((item, index) => {
+        const changeCell = changeCells[index];
+        const icon = changePrice(item.change);
+        changeCell.appendChild(icon);
+        if (item.change > 0) {
+            changeCell.style.color = "green"
+        } else {
+            changeCell.style.color = "red"
+        }
+    });
 }
 
-const formatMarketCap = (marketCap) =>{
-    const formatter = new Intl.NumberFormat('en-US',{
-        style:'currency',
-        currency:'USD',
-        minimumFractionDigits: 0, 
+const formatMarketCap = (marketCap) => {
+    const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0,
         maximumFractionDigits: 0,
     })
     return formatter.format(marketCap)
 }
 
 //color değişimi
-const changePrice = () => {
-    const stonks = document.getElementById("")
+const changePrice = (data) => {
+    const stonks = document.createElement("i")
+
+    if (data > 0) {
+        stonks.className = "fa-solid fa-arrow-trend-up"
+        stonks.style.color = "green"
+
+    }else if (data = 0) {
+        stonks.style.color = "gray"
+    } else {
+        stonks.className = "fa-solid fa-arrow-trend-down"
+        stonks.style.color = "red"
+
+    }
+    return stonks
 }
 
-
-/* <i class="fa-solid fa-arrow-trend-down"></i> */
-/* <i class="fa-solid fa-arrow-trend-up"></i> */
-
-//name symbol price marketcap
-
+const searchInput = document.querySelector("#searchInput")
+searchInput.addEventListener("input", (e) => {
+	console.log(e.target.value);
+	
+	createTable.filter((e) => e.target.name.toLowerCase().includes(e.target.value)).forEach((user) => createEl(user));
+});
