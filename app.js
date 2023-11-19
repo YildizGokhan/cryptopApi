@@ -106,7 +106,11 @@ searchInput.addEventListener("input",(e) => {
         getData()
     }
 });
-
+if (!window.fetch) {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/fetch-polyfill@3.0.0/dist/fetch-polyfill.min.js';
+    document.head.appendChild(script);
+}
 
 
 getData();
