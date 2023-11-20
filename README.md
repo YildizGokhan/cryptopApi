@@ -1,7 +1,7 @@
 Crypto App
 This project is a simple web application that fetches cryptocurrency data from the Coinranking API. It displays a table of cryptocurrencies along with their ranks, names, prices, market caps, and price changes.
 
-Features:
+Features: 
 Fetching Data: Utilizes the Coinranking API to retrieve cryptocurrency information.
 Displaying Data: Presents fetched data in a table format.
 Searching: Provides a search functionality to filter cryptocurrencies based on their names or symbols.
