@@ -3,56 +3,111 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=0.7" />
-    <title>Crypto App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crypto Pulse Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="./image/crypto2.png" type="image/x-icon">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-secondary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.html"><img class="logo" src="./image/crypto1.png" alt="" width="80px"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
+    <div class="page-bg"></div>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container py-2">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                <img class="logo" src="./image/crypto1.png" alt="Crypto Pulse Logo" width="48" height="48">
+                <span class="brand-title">Crypto Pulse</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                        id="searchInput">
 
+            <div class="collapse navbar-collapse justify-content-end mt-3 mt-lg-0" id="navbarSupportedContent">
+                <form class="search-wrapper" role="search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input class="form-control" type="search" placeholder="Search coin / symbol..." aria-label="Search"
+                        id="searchInput">
                 </form>
             </div>
         </div>
     </nav>
-    <div class="bodyArea">
-        <div class="container">
 
-            <table class="table table-bordered" id="coinTable">
+    <main class="container pb-5">
+        <section class="hero-card mb-4">
+            <div>
+                <p class="hero-eyebrow">Live market overview</p>
+                <h1>Track Top Cryptocurrencies in Real-Time</h1>
+                <p class="hero-subtitle">Now with quick stats, sorting controls, and instant refresh.</p>
+            </div>
+            <div class="hero-badge">
+                <i class="fa-solid fa-bolt"></i>
+                <span>Auto-updated</span>
+            </div>
+        </section>
 
-            </table>
+        <section class="stats-grid mb-4">
+            <article class="stat-card">
+                <p>Total Coins</p>
+                <h3 id="totalCoins">-</h3>
+            </article>
+            <article class="stat-card">
+                <p>Top 10 Market Cap</p>
+                <h3 id="topMarketCap">-</h3>
+            </article>
+            <article class="stat-card">
+                <p>24h Gainers</p>
+                <h3 id="gainersCount">-</h3>
+            </article>
+            <article class="stat-card">
+                <p>24h Losers</p>
+                <h3 id="losersCount">-</h3>
+            </article>
+        </section>
 
-        </div>
-    </div>
+        <section class="table-card">
+            <div class="table-header">
+                <div class="table-header-left">
+                    <h2>Market Leaders</h2>
+                    <span id="resultCount" class="result-pill"></span>
+                    <small id="lastUpdated" class="last-updated">Not updated yet</small>
+                </div>
 
+                <div class="table-actions">
+                    <select class="form-select" id="sortSelect" aria-label="Sort coins">
+                        <option value="rankAsc">Sort: Rank ↑</option>
+                        <option value="rankDesc">Sort: Rank ↓</option>
+                        <option value="priceDesc">Sort: Price ↓</option>
+                        <option value="priceAsc">Sort: Price ↑</option>
+                        <option value="changeDesc">Sort: 24h Change ↓</option>
+                        <option value="changeAsc">Sort: 24h Change ↑</option>
+                    </select>
+                    <button id="refreshBtn" class="btn btn-outline-light" type="button">
+                        <i class="fa-solid fa-rotate"></i>
+                        Refresh
+                    </button>
+                </div>
+            </div>
 
-
-
-
-
+            <div class="table-responsive">
+                <table class="table align-middle" id="coinTable"></table>
+            </div>
+        </section>
+    </main>
 
     <script src="app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
 </html>
