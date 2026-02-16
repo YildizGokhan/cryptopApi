@@ -1,18 +1,32 @@
-Crypto App
-This project is a simple web application that fetches cryptocurrency data from the Coinranking API. It displays a table of cryptocurrencies along with their ranks, names, prices, market caps, and price changes.
+# Crypto Pulse Dashboard
 
-Features: 
-Fetching Data: Utilizes the Coinranking API to retrieve cryptocurrency information.
-Displaying Data: Presents fetched data in a table format.
-Searching: Provides a search functionality to filter cryptocurrencies based on their names or symbols.
-Technologies Used
-HTML: Structure of the web page.
-CSS: Styling the user interface.
-Bootstrap 5: Framework for responsive design and components.
-JavaScript: Interactivity and data manipulation.
-Fetch API: Fetches data from the Coinranking API.
+This project is a simple web application that fetches cryptocurrency data from the Coinranking API and displays it in a modern dashboard.
 
+## Features
+- Live cryptocurrency data table (rank, name, price, market cap, 24h change)
+- Search by coin name or symbol
+- Sorting options (rank, price, 24h change)
+- Quick summary stats cards
+- Loading / empty / error states
+- Manual refresh button
 
-![cryptoapi1](https://github.com/YildizGokhan/cryptopApi/assets/144238207/d139a201-581b-41fb-9236-8d47d9aeccc4)
-![cryptoapi2](https://github.com/YildizGokhan/cryptopApi/assets/144238207/d0728db3-d0a4-406b-b442-136c6ca8393b)
-![cryptoapi3](https://github.com/YildizGokhan/cryptopApi/assets/144238207/3c7083bd-d907-4689-ae5c-f85ed65cf901)
+## Technologies Used
+- HTML
+- CSS
+- Bootstrap 5
+- JavaScript
+- Fetch API
+
+## Live Link
+There is no public deployment URL configured in this repository yet.
+
+### Local live link
+After starting a local server, you can access it from:
+- `http://127.0.0.1:4173`
+- `http://localhost:4173`
+
+## Run Locally
+```bash
+python3 -m http.server 4173
+```
+Then open `http://127.0.0.1:4173` in your browser.
